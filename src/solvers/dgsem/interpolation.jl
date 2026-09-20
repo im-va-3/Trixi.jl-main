@@ -115,7 +115,7 @@ end
 function multiply_dimensionwise!(data_out::AbstractArray{<:Any, 2}, matrix::AbstractMatrix,
                                  data_in::AbstractArray{<:Any, 2})
     # @tullio threads=false data_out[v, i] = matrix[i, ii] * data_in[v, ii]
-    @turbo for i in axes(data_out, 2), v in axes(data_out, 1)
+    @turbo warn_check_args=false for i in axes(data_out, 2), v in axes(data_out, 1)
         res = zero(eltype(data_out))
         for ii in axes(matrix, 2)
             res += matrix[i, ii] * data_in[v, ii]
@@ -133,7 +133,7 @@ function multiply_scalar_dimensionwise!(data_out::AbstractArray{<:Any, 1},
                                         matrix::AbstractMatrix,
                                         data_in::AbstractArray{<:Any, 1})
     # @tullio threads=false data_out[i] = matrix[i, ii] * data_in[ii]
-    @turbo for i in axes(data_out, 1)
+    @turbo warn_check_args=false for i in axes(data_out, 1)
         res = zero(eltype(data_out))
         for ii in axes(matrix, 2)
             res += matrix[i, ii] * data_in[ii]
