@@ -140,11 +140,12 @@ jobs:
           directories: src,examples,ext
       - uses: codecov/codecov-action@v7
         if: ${{ !cancelled() }}
+        continue-on-error: true
         with:
           files: ./lcov.info
           flags: unittests
           name: codecov-umbrella
-          fail_ci_if_error: true
+          fail_ci_if_error: false
           verbose: true
           token: ${{ secrets.CODECOV_TOKEN }}
       # The standard setup of Coveralls is just annoying for parallel builds, see, e.g.,
@@ -210,6 +211,7 @@ jobs:
           @show covered_lines, total_lines = get_summary(coverage)
           LCOV.writefile("./lcov.info", coverage)
       - uses: coverallsapp/github-action@v2
+        continue-on-error: true
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           file: ./lcov.info
