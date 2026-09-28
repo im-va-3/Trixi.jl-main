@@ -352,3 +352,21 @@ This project has benefited from funding by the
 [Mainz Institute of Multiscale Modeling (M³ODEL)](https://model.uni-mainz.de/).
 
 Trixi.jl is supported by [NumFOCUS](https://numfocus.org/) as an Affiliated Project.
+
+
+## Step-by-step user guide
+
+1. **Install Julia and Trixi.** In the Julia REPL run <code>using Pkg; Pkg.add(["Trixi", "Trixi2Vtk", "OrdinaryDiffEqLowStorageRK", "OrdinaryDiffEqSSPRK", "Plots"])</code>. Start with the user installation listed above.
+2. **Run the default example.** Run <code>using Trixi; trixi_include(default_example())</code>. Allow Julia to compile on the first run, then inspect the printed solver summary and output files.
+3. **Choose equations and a mesh.** Select a supported conservation law, mesh type/dimension, DG/SBP discretization, numerical flux, and boundary conditions. Start from a nearby example rather than creating every component at once.
+4. **Set accuracy and time integration.** Choose polynomial order, CFL/time-step control, final time, and an explicit integrator. Check conservation/error against a refined mesh or known solution.
+5. **Add advanced features.** Configure adaptive mesh refinement, limiters, entropy-stable or kinetic-energy-preserving flux differencing, arbitrary precision, differentiable parameters, or a multi-physics model as needed.
+6. **Visualize and scale.** Plot output in Julia, export through Trixi2Vtk for ParaView/VisIt, and use documented multithreading/MPI options for larger runs.
+
+### Functionality map
+
+- Conservation-law solvers for compressible Euler/Navier–Stokes, MHD, acoustics/linearized Euler, diffusion, shallow water, Lattice-Boltzmann, and scalar equations.
+- 1D/2D/3D line/quad/hex/simplex meshes; structured/unstructured, Cartesian/curvilinear, adaptive quadtrees/octrees and p4est forests.
+- High-order DG and SBP methods, flux differencing, entropy/shock/positivity/subcell limiters, boundary conditions, and SciML time integrators.
+- Differentiable programming, shared-memory/MPI parallelism, visualization and postprocessing; consult the [documentation](https://trixi-framework.github.io/TrixiDocumentation/stable/) and local [examples](examples/) for complete configuration options.
+
